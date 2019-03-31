@@ -1,5 +1,5 @@
 import React from 'react';
-import {Menu,Icon} from 'antd';
+import {Menu} from 'antd';
 import './index.less';
 import menuConfig from './../../config/menuConfig';
 const SubMenu=Menu.SubMenu;
