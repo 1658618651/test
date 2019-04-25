@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button,Card,Radio,message} from 'antd';
+import {Button,Card,message} from 'antd';
 import './ui.less';
 export default class Message extends React.Component{
     showMessage=(type)=>{
