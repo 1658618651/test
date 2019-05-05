@@ -19,6 +19,7 @@ import HighTables from './pages/tables/hightables'
 import City from './pages/city/index.js';
 import Order from './pages/city/order/index';
 import Common from './common'
+import OrderDetail from './pages/order/details'
 export default class IRouter extends React.Component{
     render(){
         return (
@@ -49,7 +50,7 @@ export default class IRouter extends React.Component{
                 }/>
                         <Route path="/common" render={() =>
                     <Common>
-                        <Route path="/common/order/detail/:orderId" component={Login} />
+                        <Route path="/common/order/detail/:orderId" component={OrderDetail} />
                     </Common>
                         }
                         />
