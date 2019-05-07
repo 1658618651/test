@@ -24,7 +24,8 @@ static ajax(options){
         loading=document.getElementById("ajaxLoading");
         loading.style.display="block";
     }
-    let baseUrl=" https://www.easy-mock.com/mock/5cb88c728a2e4271d962e27c/api";
+    // let baseUrl=" https://www.easy-mock.com/mock/5cb88c728a2e4271d962e27c/api";
+    let baseUrl=" https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api";
     return new Promise((resolve,reject)=>{
     axios({
         url:options.url,
