@@ -2,6 +2,7 @@ import React from 'react';
 import {Card,Button,Form,Select,Table,Modal,message,DatePicker} from 'antd';
 import Utils from "../../../util/util";
 import axios from '../../../axios';
+import BaseForm from '../../../components/BaseForm'
 const FormItem=Form.Item;
 const Option = Select.Option;
 export default class Order extends React.Component{
@@ -17,7 +18,7 @@ export default class Order extends React.Component{
     params={
         page:1
     }
-    formList = [
+    formList = [//项目工程化，表单结构化
         {
             type:'SELECT',
             label:'城市',
@@ -26,6 +27,14 @@ export default class Order extends React.Component{
             initialValue:'1',
             width:80,
             list: [{ id: '0', name: '全部' }, { id: '1', name: '北京' }, { id: '2', name: '天津' }, { id: '3', name: '上海' }]
+        },
+        {
+            type:'INPUT',
+            label:'模式',
+            field:'mode',
+            placeholder:'请输入模式',
+            initialValue:'2',
+            width:180
         },
         {
             type: '时间查询'
@@ -41,19 +50,26 @@ export default class Order extends React.Component{
         }
     ]
     handleFilter = (params)=>{
-        this.params = params;
+        this.params = params;//params是BaseForm的this.props.filterSubmit(fieldValue);的调用方法，fieldValue传递值
         this.requestList();
     }
     componentDidMount(){
         this.requestList();
+    }
+    handleFilter=(params)=>{
+    this.params=params;
+    this.requestList();
     }
     requestList=()=>{
         let _this=this;
     axios.ajax({
         url:'/order/list',
         data:{
+            // params:{
+            //     page:this.params.page
+            // }
             params:{
-                page:this.params.page
+                page:this.params
             }
         }
     }).then((res)=>{
@@ -180,7 +196,9 @@ export default class Order extends React.Component{
         return (
             <div>
                 <Card>
-                <FilterForm/>
+                {/* <FilterForm/> */}
+                <BaseForm formList={this.formList} filterSubmit={this.handleFilter}/>
+                {/* formList是父级 */}
                 </Card>
                 <Card style={{marginTop:"10px"}}>
                     <Button type="primary" onClick={this.openOrderDetail}>订单详情</Button>
@@ -267,7 +285,7 @@ class FilterForm extends React.Component{
             </FormItem>
             <FormItem label="订单状态">
             {
-                getFieldDecorator("op_mode")(
+                getFieldDecorator("order_status")(
                     <Select placeholder="全部" style={{width:100,margin:"0 20px"}}>
                     <Option value="">全部</Option>
                     <Option value="1">进行中</Option>
